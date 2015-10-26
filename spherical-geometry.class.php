@@ -13,7 +13,7 @@
 
 
 /** 
- * Static class SphericalGeometry
+ * Static class Spherical_geometry
  * Utility functions for computing geodesic angles, distances and areas.
  */  
 class Spherical_geometry
@@ -259,8 +259,8 @@ class LatLng
         
         if ($noWrap === false)
         {
-            $lat = SphericalGeometry::clampLatitude($lat);
-            $lng = SphericalGeometry::wrapLongitude($lng);
+            $lat = Spherical_geometry::clampLatitude($lat);
+            $lng = Spherical_geometry::wrapLongitude($lng);
         }
         
         $this->_lat = $lat;
@@ -284,8 +284,8 @@ class LatLng
             return false;
         }
         
-        return abs($this->_lat - $LatLng->getLat()) <= SphericalGeometry::EQUALS_MARGIN_ERROR 
-            && abs($this->_lng - $LatLng->getLng()) <= SphericalGeometry::EQUALS_MARGIN_ERROR;             
+        return abs($this->_lat - $LatLng->getLat()) <= Spherical_geometry::EQUALS_MARGIN_ERROR 
+            && abs($this->_lng - $LatLng->getLng()) <= Spherical_geometry::EQUALS_MARGIN_ERROR;             
     }
     
     public function toString()
@@ -322,8 +322,8 @@ class LatLngBounds
         if ($LatLngSw)
         {
             $LatLngNe = !$LatLngNe ? $LatLngSw : $LatLngNe;
-            $sw = SphericalGeometry::clampLatitude($LatLngSw->getLat());
-            $ne = SphericalGeometry::clampLatitude($LatLngNe->getLat());
+            $sw = Spherical_geometry::clampLatitude($LatLngSw->getLat());
+            $ne = Spherical_geometry::clampLatitude($LatLngNe->getLat());
             $this->_LatBounds = new LatBounds($sw, $ne);
             
             $sw = $LatLngSw->getLng();
@@ -335,8 +335,8 @@ class LatLngBounds
             }
             else 
             {
-                $sw = SphericalGeometry::wrapLongitude($sw);
-                $ne = SphericalGeometry::wrapLongitude($ne);
+                $sw = Spherical_geometry::wrapLongitude($sw);
+                $ne = Spherical_geometry::wrapLongitude($ne);
                 $this->_LngBounds = new LngBounds($sw, $ne);
             }
         } 
@@ -483,7 +483,7 @@ class LatBounds
             ? $LatBounds->isEmpty() 
             : abs($LatBounds->getSw() - $this->_swLat) 
                 + abs($this->_neLat - $LatBounds->getNe()) 
-                <= SphericalGeometry::EQUALS_MARGIN_ERROR;
+                <= Spherical_geometry::EQUALS_MARGIN_ERROR;
     }
     
     public function contains($lat)
@@ -540,7 +540,7 @@ class LngBounds
         
         if ($this->_swLng > $this->_neLng) 
         {
-            $midPoint = SphericalGeometry::wrapLongitude($midPoint + 180);
+            $midPoint = Spherical_geometry::wrapLongitude($midPoint + 180);
         }
         
         return $midPoint;
@@ -579,7 +579,7 @@ class LngBounds
             ? $LngBounds->isEmpty() 
             : fmod(abs($LngBounds->getSw() - $this->_swLng), 360) 
                 + fmod(abs($LngBounds->getNe() - $this->_neLng), 360) 
-                <= SphericalGeometry::EQUALS_MARGIN_ERROR;   
+                <= Spherical_geometry::EQUALS_MARGIN_ERROR;   
     }
     
     public function contains($lng)
