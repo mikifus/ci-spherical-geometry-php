@@ -1,4 +1,4 @@
-<?php
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 /*!
  * Spherical Geometry PHP Library v1.1.1
@@ -16,7 +16,7 @@
  * Static class SphericalGeometry
  * Utility functions for computing geodesic angles, distances and areas.
  */  
-class SphericalGeometry
+class Spherical_geometry
 {
     const EQUALS_MARGIN_ERROR = 1.0E-9;
     
